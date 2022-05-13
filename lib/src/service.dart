@@ -68,6 +68,20 @@ class MagxService extends _$_MagxService implements _MagxService {
       ),
     );
   }
+  Future<Response> authenticateWithEmail({required String accessToken, String? fmsToken}) {
+    return _authenticate(
+      wrapWithData(
+        {'type': 'google', 'accessToken': accessToken, 'mToken': fmsToken}..removeWhere((key, value) => value == null),
+      ),
+    );
+  }
+  Future<Response> authenticateWithCustom({required String userName, String? password}) {
+    return _authenticate(
+      wrapWithData(
+        {'type': 'custom', 'userName': userName, 'password': password}..removeWhere((key, value) => value == null),
+      ),
+    );
+  }
 
   Future<Response> authenticateApple({required String accessToken, String? fmsToken}) {
     return _authenticate(wrapWithData({

@@ -107,7 +107,16 @@ class MagxClient {
           (value) => value.copyWith(body: value.body != null ? Authentication.fromJson(value.body) : null),
         );
   }
-
+  Future<Response<Authentication>> authenticateCustom({required String userName, String? password}) {
+    return api.service
+        .authenticateWithCustom(
+      userName: userName,
+      password: password,
+    )
+        .then(
+          (value) => value.copyWith(body: value.body != null ? Authentication.fromJson(value.body) : null),
+    );
+  }
   Future<Response<Authentication>> authenticateApple({required String accessToken, String? fmsToken}) => api.service
       .authenticateApple(
         accessToken: accessToken,
